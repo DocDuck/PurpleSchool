@@ -13,8 +13,8 @@ class Product {
         this._price = price;
     }
 
-    getID() {
-        return this._id
+    getPrice() {
+        return this._price
     }
 }
 
@@ -47,12 +47,19 @@ class Cart {
     private _products: Record<Product['_id'], Product> = {};
     private _delivery: HomeDelivery | PointDelivery;
 
-    addProduct(product: Product) {
-        const id = product.getID()
-        this._products[id] = product
+    addProduct(name: Product['_name'], price: Product['_price']) {
+        if (!name || !price) {
+            throw new Error('Для добавления тоавара не введены название и/или цена')
+        }
+        const id = new Date().toDateString()
+        this._products[id] = new Product(id, name, price)
     }
 
     removeProduct(id: Product['_id']) {
         this._products[id] && delete this._products[id]
+    }
+
+    getCurrency() {
+        return Object.values(this._products).reduce((summ, item) => summ + item.getPrice(), 0)
     }
 }
