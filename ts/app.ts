@@ -3,10 +3,19 @@ enum EDeliveryType {
     toPoint = 'toPoint',
 }
 
-interface Product {
-    id: string;
-    name: string;
-    price: number;
+class Product {
+    private _id: string;
+    private _name: string;
+    private _price: number;
+    constructor(id: string, name: string, price: number) {
+        this._id = id;
+        this._name = name;
+        this._price = price;
+    }
+
+    getID() {
+        return this._id
+    }
 }
 
 class Delivery {
@@ -35,10 +44,15 @@ class PointDelivery extends Delivery {
 }
 
 class Cart {
-    private _products: Product[] = [];
-    private _delivery: Delivery;
+    private _products: Record<Product['_id'], Product> = {};
+    private _delivery: HomeDelivery | PointDelivery;
 
     addProduct(product: Product) {
-        this._products.push(product)
+        const id = product.getID()
+        this._products[id] = product
+    }
+
+    removeProduct(id: Product['_id']) {
+        this._products[id] && delete this._products[id]
     }
 }
