@@ -16,8 +16,8 @@ function CreatedAt<T extends { new(...args: any[]): {}}>(constructor: T) {
     }
 }
 
-function Log(t: Object, pk: string, d: TypedPropertyDescriptor<(...args: any[]) => any>) {
-    console.log(`Метод ${pk} вызван ${new Date().toString()}`)
+function Log(t: Object, pk: string | symbol, d: TypedPropertyDescriptor<(...args: any[]) => any>) {
+    console.log(`Метод ${String(pk)} вызван ${new Date().toString()}`)
     console.log('Дескриптор метода:', JSON.stringify(d))
 }
 
