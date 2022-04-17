@@ -5,8 +5,9 @@ class ExampleClass {
     };
 
     @Log
-    bar() {
-        console.log('Вызов метода бар', this.foo, this.createdAt)
+    @Intercept
+    bar(a?: any) {
+        console.log('Вызов метода бар', this.createdAt, a)
     }
 }
 
@@ -16,9 +17,20 @@ function CreatedAt<T extends { new(...args: any[]): {}}>(constructor: T) {
     }
 }
 
-function Log(t: Object, pk: string | symbol, d: TypedPropertyDescriptor<(...args: any[]) => any>) {
+function Log(t: Object, pk: string | symbol, d: TypedPropertyDescriptor<(...args: any[]) => any>): TypedPropertyDescriptor<(...args: any[]) => any> | void {
     console.log(`Метод ${String(pk)} вызван ${new Date().toString()}`)
     console.log('Дескриптор метода:', JSON.stringify(d))
 }
 
-new ExampleClass().bar()
+function Intercept(target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<(...args: any[]) => any>): TypedPropertyDescriptor<(...args: any[]) => any> | void {
+    const fn = descriptor.value
+    descriptor.value = (...args: any[]) => {
+        try {
+            fn?.apply(target, args)
+        } catch (e) {
+            throw new Error(`Метод не сработал(( ${e}`)
+        }
+    }
+}
+
+new ExampleClass().bar('test')
