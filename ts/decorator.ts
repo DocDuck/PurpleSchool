@@ -24,9 +24,9 @@ function Log(t: Object, pk: string | symbol, d: TypedPropertyDescriptor<(...args
 
 function Intercept(target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<(...args: any[]) => any>): TypedPropertyDescriptor<(...args: any[]) => any> | void {
     const fn = descriptor.value
-    descriptor.value = (...args: any[]) => {
+    descriptor.value = async (...args: any[]) => {
         try {
-            fn?.apply(target, args)
+            return await fn?.apply(target, args)
         } catch (e) {
             throw new Error(`Метод не сработал(( ${e}`)
         }
