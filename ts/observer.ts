@@ -15,7 +15,7 @@ class Lead {
 
 class NewLead implements Subject {
     private observers: Observer[] = [];
-    public state: Lead;
+    public state: Lead | undefined;
 
     attach(observer: Observer): void {
         if (this.observers.includes(observer)) return;
