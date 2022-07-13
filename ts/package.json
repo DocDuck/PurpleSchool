@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "@types/inquirer": "^8.2.1",
+    "@types/inquirer": "^8.2.0",
     "@types/node": "^18.0.3",
-    "inquirer": "^9.0.0"
+    "inquirer": "^8.2.0"
   }
 }
