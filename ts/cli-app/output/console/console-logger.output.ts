@@ -1,4 +1,4 @@
-import {IStreamHandler} from "../../core/handlers/stream.type";
+import { IStreamHandler } from "../../core/handlers/stream.type";
 
 export class ConsoleLogger implements IStreamHandler {
     private static logger: ConsoleLogger;
