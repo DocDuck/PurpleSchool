@@ -5,7 +5,6 @@ class App {
         console.log('Cli app is running...')
         const promptService = new PromptService()
         const res = await promptService.input<'number'>({type: 'number', message: 'Enter your number'})
-        console.log('result:', res)
     }
 }
 
