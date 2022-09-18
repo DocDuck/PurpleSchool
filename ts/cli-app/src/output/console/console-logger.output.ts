@@ -1,6 +1,6 @@
-import { IStreamHandler } from "../../core/handlers/stream.type";
+import { IStreamLogger } from "../../core/handlers/stream.type";
 
-export class ConsoleLogger implements IStreamHandler {
+export class ConsoleLogger implements IStreamLogger {
     private static logger: ConsoleLogger;
     public static getInstance() {
         if (!ConsoleLogger.logger) {
