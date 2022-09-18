@@ -1,6 +1,6 @@
-import {IStreamLogger} from "../handlers/stream.type";
-import {ChildProcessWithoutNullStreams} from "child_process";
-import {ICommand} from "./command.types";
+import { IStreamLogger } from "../handlers/stream.type";
+import { ChildProcessWithoutNullStreams } from "child_process";
+import { ICommand } from "./command.types";
 
 export abstract class CommandExecutor<Input> {
     constructor(private logger: IStreamLogger) {}
